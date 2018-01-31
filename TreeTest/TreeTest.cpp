@@ -68,6 +68,43 @@ Tree* CreateTree(Tree* root, int node)
 	return root;
 }
 
+/*前序递归遍历*/
+void PreOrder(Tree* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+
+	cout << root->value << endl;
+	PreOrder(root->left);
+	PreOrder(root->right);
+}
+
+/*中序递归遍历*/
+void InOrder(Tree* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	InOrder(root->left);
+	cout << root->value << endl;
+	InOrder(root->right);
+}
+
+/*后序递归遍历*/
+void PostOrder(Tree* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	PostOrder(root->left);
+	PostOrder(root->right);
+	cout << root->value << endl;
+}
+
 int main()
 {
 	Tree* root = NULL;
@@ -77,6 +114,12 @@ int main()
 	{
 		root = CreateTree(root, arrays[i]);
 	}
+	cout << "PreOrder" << endl;
+	PreOrder(root);
+	cout << "InOrder" << endl;
+	InOrder(root);
+	cout << "PostOrder" << endl;
+	PostOrder(root);
     return 0;
 }
 
