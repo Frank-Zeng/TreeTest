@@ -105,6 +105,109 @@ void PostOrder(Tree* root)
 	cout << root->value << endl;
 }
 
+/*非递归前序递归遍历*/
+void PreNonRecursive(Tree* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	stack<Tree*> nStack;
+	nStack.push(root);
+	while (!nStack.empty())
+	{
+		Tree* node = nStack.top();
+		nStack.pop();
+		cout << node->value << endl;
+		if (node->right != NULL)
+		{
+			nStack.push(node->right);
+		}
+		if (node->left != NULL)
+		{
+			nStack.push(node->left);
+		}
+	}
+}
+
+/*非递归前序递归遍历2*/
+void PreNonRecursive2(Tree* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	stack<Tree*> nStack;
+	Tree* cur = root;
+	while (cur != NULL || !nStack.empty())
+	{
+		while (cur != NULL)
+		{
+			cout << cur->value << endl;
+			nStack.push(cur);
+			cur = cur->left;
+		}
+		if (!nStack.empty())
+		{
+			cur = nStack.top();
+			nStack.pop();
+			cur = cur->right;
+		}
+	}
+}
+
+/*非递归中序递归遍历*/
+void InNonRecursive(Tree* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	stack<Tree*> nstack;
+	Tree* cur = root;
+	while (cur != NULL || !nstack.empty())
+	{
+		while (cur != NULL)
+		{
+			nstack.push(cur);
+			cur = cur->left;
+		}
+		if (!nstack.empty())
+		{
+			cur = nstack.top();
+			nstack.pop();
+			cout << cur->value << endl;
+			cur = cur->right;
+		}
+	}
+}
+
+/*非递归中序递归遍历2*/
+void InNonRecursive2(Tree* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	stack<Tree*> nstack;
+	Tree* cur = root;
+	while (cur != NULL || !nstack.empty())
+	{
+		if (cur != NULL)
+		{
+			nstack.push(cur);
+			cur = cur->left;
+		}
+		else 
+		{
+			cur = nstack.top();
+			nstack.pop();
+			cout << cur->value << endl;
+			cur = cur->right;
+		}
+	}
+}
+
 int main()
 {
 	Tree* root = NULL;
@@ -114,7 +217,10 @@ int main()
 	{
 		root = CreateTree(root, arrays[i]);
 	}
+
 	cout << "PreOrder" << endl;
+	PreNonRecursive(root);
+	PreNonRecursive2(root);
 	PreOrder(root);
 	cout << "InOrder" << endl;
 	InOrder(root);
